@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.capa.capa.capa.RegisterActivity"
+    android:background="@color/colorPrimaryDark">
+
+    <LinearLayout
+        android:id="@+id/registerLLO"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <ImageView
+            android:id="@+id/imageView"
+            android:layout_width="150dp"
+            android:layout_height="150dp"
+            android:adjustViewBounds="false"
+            android:contentDescription="logo"
+            android:layout_gravity="center"
+            android:cropToPadding="false"
+            app:srcCompat="@drawable/capa" />
+
+        <TextView
+            android:id="@+id/registerFormTitle"
+            style="@style/textView_style"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:contentDescription="registerForm"
+            android:text="Register Form"
+            android:textAppearance="@style/TextAppearance.AppCompat.Headline" />
+
+        <EditText
+            android:id="@+id/registerName"
+            style="@style/editText_style"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:hint="User Name"
+            android:inputType="textPersonName"
+            android:textColor="@color/colorPrimaryDark" />
+
+        <EditText
+            android:id="@+id/registerEmail"
+            style="@style/editText_style"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:hint="Email"
+            android:inputType="textEmailAddress"
+            android:textColor="@color/colorPrimaryDark" />
+
+        <EditText
+            android:id="@+id/registerPw"
+            style="@style/editText_style"
+            android:hint="password"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:inputType="textPassword" />
+
+        <EditText
+            android:id="@+id/registerConfromPw"
+            style="@style/editText_style"
+            android:hint="confirm your password"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:inputType="textPassword" />
+
+        <EditText
+            android:id="@+id/registerDOB"
+            style="@style/editText_style"
+            android:hint="DOB"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:inputType="date" />
+
+        <EditText
+            android:id="@+id/registerCarName"
+            style="@style/editText_style"
+
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:hint="Car"
+            android:inputType="textPersonName" />
+        <Button
+            android:id="@+id/registerBtn"
+            style="@style/button_style"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Sign up now!"
+            />
+
+
+    </LinearLayout>
+</android.support.constraint.ConstraintLayout>

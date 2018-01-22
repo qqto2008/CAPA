@@ -1,0 +1,130 @@
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@color/colorPrimary"
+    tools:context="com.capa.capa.capa.EventFragment">
+
+<ScrollView
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+       <LinearLayout
+           android:layout_width="match_parent"
+           android:layout_height="wrap_content"
+           android:orientation="vertical"
+           android:layout_gravity="center_horizontal"
+           android:gravity="center_horizontal">
+
+           <android.support.v7.widget.CardView
+               android:layout_width="360dp"
+               android:layout_height="250dp"
+               android:layout_gravity="center_horizontal"
+               app:cardBackgroundColor="@color/tiffanyBlue"
+               app:cardCornerRadius="10dp"
+               android:layout_marginBottom="20dp"
+               android:layout_marginTop="5dp">
+               <LinearLayout
+                   android:layout_width="match_parent"
+                   android:layout_height="match_parent"
+                   android:gravity="center_horizontal"
+                   android:orientation="vertical">
+                   <ImageView
+                       android:layout_width="400dp"
+                       android:layout_height="200dp"
+                       android:src="@drawable/broadway"
+                       android:scaleType="fitXY"
+                       />
+                   <TextView
+                       android:layout_width="match_parent"
+                       android:layout_height="wrap_content"
+                       android:textColor="@color/white"
+                       android:textSize="17dp"
+                       android:text="Broadway Shopping Centre Car Park"/>
+                   <TextView
+                       android:layout_width="match_parent"
+                       android:layout_height="wrap_content"
+                       android:textColor="@color/white"
+                       android:textSize="17dp"
+                       android:text="2 hours free"/>
+
+               </LinearLayout>
+
+           </android.support.v7.widget.CardView>
+           <android.support.v7.widget.CardView
+               android:layout_width="360dp"
+               android:layout_height="250dp"
+               android:layout_gravity="center_horizontal"
+               app:cardBackgroundColor="@color/tiffanyBlue"
+               app:cardCornerRadius="10dp"
+               android:layout_marginBottom="20dp"
+               android:layout_marginTop="5dp">
+               <LinearLayout
+                   android:layout_width="match_parent"
+                   android:layout_height="match_parent"
+                   android:gravity="center_horizontal"
+                   android:orientation="vertical">
+                   <ImageView
+                       android:layout_width="400dp"
+                       android:layout_height="200dp"
+                       android:src="@drawable/broadway"
+                       android:scaleType="fitXY"
+                       />
+                   <TextView
+                       android:layout_width="match_parent"
+                       android:layout_height="wrap_content"
+                       android:textColor="@color/white"
+                       android:textSize="17dp"
+                       android:text="Townhall Car Park"/>
+                   <TextView
+                       android:layout_width="match_parent"
+                       android:layout_height="wrap_content"
+                       android:textColor="@color/white"
+                       android:textSize="17dp"
+                       android:text="$5 per hour"/>
+
+               </LinearLayout>
+
+           </android.support.v7.widget.CardView>
+           <android.support.v7.widget.CardView
+               android:layout_width="360dp"
+               android:layout_height="250dp"
+               android:layout_gravity="center_horizontal"
+               app:cardBackgroundColor="@color/tiffanyBlue"
+               app:cardCornerRadius="10dp"
+               android:layout_marginBottom="20dp"
+               android:layout_marginTop="5dp">
+               <LinearLayout
+                   android:layout_width="match_parent"
+                   android:layout_height="match_parent"
+                   android:gravity="center_horizontal"
+                   android:orientation="vertical">
+                   <ImageView
+                       android:layout_width="400dp"
+                       android:layout_height="200dp"
+                       android:src="@drawable/broadway"
+                       android:scaleType="fitXY"
+                       />
+                   <TextView
+                       android:layout_width="match_parent"
+                       android:layout_height="wrap_content"
+                       android:textColor="@color/white"
+                       android:textSize="17dp"
+                       android:text="Central Park Car Park"/>
+                   <TextView
+                       android:layout_width="match_parent"
+                       android:layout_height="wrap_content"
+                       android:textColor="@color/white"
+                       android:textSize="17dp"
+                       android:text="First hour free"/>
+
+               </LinearLayout>
+
+           </android.support.v7.widget.CardView>
+
+
+       </LinearLayout>
+</ScrollView>
+
+
+</FrameLayout>
