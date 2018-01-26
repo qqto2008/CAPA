@@ -112,7 +112,7 @@ public class PaymentFragment extends Fragment {
                 if(cardForm.getCardNumber()!=null&&cardForm.getExpirationMonth()!=null&&cardForm.getExpirationYear()!=null
                         &&cardForm.getCvv()!=null&&cardForm.getPostalCode()!=null&&cardForm.getCountryCode()!=null&&cardForm.getMobileNumber()!=null) {
 
-                    payment.setVisibility(View.GONE);
+
                     cardForm.setVisibility(View.GONE);
                     TextView paymentDone = getActivity().findViewById(R.id.paymentDone);
                     paymentDone.setVisibility(View.VISIBLE);
