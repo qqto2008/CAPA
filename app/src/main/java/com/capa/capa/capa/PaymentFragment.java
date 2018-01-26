@@ -33,7 +33,7 @@ public class PaymentFragment extends Fragment {
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
-    private Button payment;
+    private Button payBtn;
 
     private OnFragmentInteractionListener mListener;
 
@@ -105,8 +105,9 @@ public class PaymentFragment extends Fragment {
                 .mobileNumberRequired(true)
                 .actionLabel("PAY")
                 .setup(getActivity());
-        payment = getActivity().findViewById(R.id.payment);
-        payment.setOnClickListener(new View.OnClickListener() {
+        payBtn = getActivity().findViewById(R.id.payBtn);
+        payBtn.setVisibility(View.VISIBLE);
+        payBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 if(cardForm.getCardNumber()!=null&&cardForm.getExpirationMonth()!=null&&cardForm.getExpirationYear()!=null
