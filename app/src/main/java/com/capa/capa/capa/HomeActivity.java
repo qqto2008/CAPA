@@ -12,15 +12,33 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.EditText;
+import android.widget.ImageView;
+import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+
+import java.util.ArrayList;
 
 
 public class HomeActivity extends AppCompatActivity {
     private DrawerLayout mDrawerLayout;
     private ActionBarDrawerToggle mToggle;
     private FirebaseAuth firebaseAuth;
+    private ImageView imageView;
+    private TextView displayNameTextEdit;
+    private TextView displayEmail;
+    private NavigationView nvDrawer;
+    private DatabaseReference firebaseRef;
+
 
 
 
@@ -28,14 +46,23 @@ public class HomeActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
-        mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer);
+        mDrawerLayout = findViewById(R.id.drawer);
         mToggle = new ActionBarDrawerToggle(this,mDrawerLayout,R.string.open,R.string.close);
-        NavigationView nvDrawer = (NavigationView) findViewById(R.id.nv);
+        nvDrawer = findViewById(R.id.nv);
         mDrawerLayout.addDrawerListener(mToggle);
         mToggle.syncState();
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         setupDrawerContent(nvDrawer);
         firebaseAuth = FirebaseAuth.getInstance();
+        firebaseRef = FirebaseDatabase.getInstance().getReference();
+        getSupportFragmentManager().beginTransaction().replace(R.id.content_frame, new DashBoardFragment()).commit();
+
+
+        View header = nvDrawer.getHeaderView(0);
+        imageView = header.findViewById(R.id.profileImagemView);
+        displayNameTextEdit = header.findViewById(R.id.profileName);
+        displayEmail = header.findViewById(R.id.profileEmail);
+
         loadUserInformation();
 
     }
@@ -52,10 +79,39 @@ public class HomeActivity extends AppCompatActivity {
     private void loadUserInformation() {
 
         FirebaseUser user = firebaseAuth.getCurrentUser();
-        String photoUrl = user.getPhotoUrl().toString();
-        String displayName = user.getDisplayName();
+
+        firebaseRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                showData(dataSnapshot);
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
 
 
+
+
+
+
+    }
+
+    private void showData(DataSnapshot dataSnapshot) {
+        String uid = firebaseAuth.getCurrentUser().getUid().toString();
+        for (DataSnapshot ds : dataSnapshot.getChildren()){
+            User user = new User();
+            user.setUsername(ds.child(uid).getValue(User.class).getUsername());
+            user.setDob(ds.child(uid).getValue(User.class).getDob());
+            user.setEmail(ds.child(uid).getValue(User.class).getEmail());
+            displayNameTextEdit.setText(user.username);
+            displayEmail.setText(user.email);
+
+
+
+        }
     }
 
     @Override

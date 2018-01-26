@@ -3,10 +3,16 @@ package com.capa.capa.capa;
 import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.TextView;
+import android.widget.Toast;
+
+import com.braintreepayments.cardform.view.CardForm;
 
 
 /**
@@ -23,9 +29,11 @@ public class PaymentFragment extends Fragment {
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
 
+    private CardForm cardForm;
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
+    private Button payment;
 
     private OnFragmentInteractionListener mListener;
 
@@ -84,6 +92,37 @@ public class PaymentFragment extends Fragment {
     public void onDetach() {
         super.onDetach();
         mListener = null;
+    }
+
+    @Override
+    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+        cardForm = getActivity().findViewById(R.id.card_form);
+        cardForm.cardRequired(true)
+                .expirationRequired(true)
+                .cvvRequired(true)
+                .postalCodeRequired(true)
+                .mobileNumberRequired(true)
+                .actionLabel("PAY")
+                .setup(getActivity());
+        payment = getActivity().findViewById(R.id.payment);
+        payment.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if(cardForm.getCardNumber()!=null&&cardForm.getExpirationMonth()!=null&&cardForm.getExpirationYear()!=null
+                        &&cardForm.getCvv()!=null&&cardForm.getPostalCode()!=null&&cardForm.getCountryCode()!=null&&cardForm.getMobileNumber()!=null) {
+
+                    payment.setVisibility(View.GONE);
+                    cardForm.setVisibility(View.GONE);
+                    TextView paymentDone = getActivity().findViewById(R.id.paymentDone);
+                    paymentDone.setVisibility(View.VISIBLE);
+                }else {
+                    Toast.makeText(getActivity(),"Please fill the form completely",Toast.LENGTH_LONG).show();
+                }
+            }
+        });
+
+
     }
 
     /**

@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_margin="7dp"
+    app:cardCornerRadius="20dp"
+    android:elevation="90dp"
+    >
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="248dp"
+        android:orientation="vertical"
+        android:background="#006666"
+        android:gravity="center">
+
+            <TextView
+                android:id="@+id/date"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+
+                android:text="24/01/2018"
+                android:fontFamily="casual"
+                android:textColor="@color/white"
+                android:textSize="30dp"/>
+            <TextView
+                android:id="@+id/weekday"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="casual"
+                android:textColor="@color/white"
+                android:textSize="20dp"
+                android:gravity="center"
+                android:text="Monday"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center">
+
+                <TextView
+
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="20dp"
+                    android:gravity="center"
+                    android:textColor="@color/white"
+                    android:text="From "/>
+            <TextView
+                android:id="@+id/startTimeCardView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="20dp"
+                android:gravity="center"
+                android:textColor="@color/white"
+                android:text="12:00"/>
+                <TextView
+
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="20dp"
+                    android:gravity="center"
+                    android:textColor="@color/white"
+                    android:text=" to "/>
+            <TextView
+                android:id="@+id/endTimeCardView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="20dp"
+                android:gravity="center"
+                android:textColor="@color/white"
+                android:text="13:00"/>
+            </LinearLayout>
+
+        <TextView
+            android:id="@+id/feeCardView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="20dp"
+            android:gravity="center"
+            android:textColor="@color/white"
+            android:text="$100"/>
+
+    </LinearLayout>
+
+</android.support.v7.widget.CardView>

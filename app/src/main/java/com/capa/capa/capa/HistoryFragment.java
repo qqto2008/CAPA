@@ -1,12 +1,27 @@
 package com.capa.capa.capa;
 
 import android.content.Context;
+import android.icu.text.DateFormatSymbols;
+import android.icu.text.SimpleDateFormat;
+import android.icu.util.Calendar;
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
+
+import com.firebase.ui.database.FirebaseRecyclerAdapter;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+
+import java.util.Date;
 
 
 /**
@@ -26,6 +41,11 @@ public class HistoryFragment extends Fragment {
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
+    private RecyclerView historyList;
+    private DatabaseReference firebaseDatabase;
+    private View rootView;
+    private Context c;
+    private FirebaseAuth firebaseAuth;
 
     private OnFragmentInteractionListener mListener;
 
@@ -64,7 +84,11 @@ public class HistoryFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_history, container, false);
+
+        rootView = inflater.inflate(R.layout.fragment_history, container, false);
+        c=getContext();
+
+        return rootView;
     }
 
     // TODO: Rename method, update argument and hook method into UI event
@@ -77,6 +101,78 @@ public class HistoryFragment extends Fragment {
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
+
+    }
+
+    @Override
+    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+        firebaseDatabase= FirebaseDatabase.getInstance().getReference().child("users").child(user.getUid().toString()).child("History");
+        firebaseDatabase.keepSynced(true);
+
+        historyList=rootView.findViewById(R.id.myrecycleview);
+        historyList.setHasFixedSize(true);
+        historyList.setLayoutManager(new LinearLayoutManager(getContext()));
+        FirebaseRecyclerAdapter<History,HistoryViewHolder>firebaseRecyclerAdapter=new FirebaseRecyclerAdapter<History, HistoryViewHolder>
+                (History.class,R.layout.history_row,HistoryViewHolder.class,firebaseDatabase) {
+            @Override
+            protected void populateViewHolder(HistoryViewHolder viewHolder, History model, int position) {
+                viewHolder.setFee(model.getFee());
+                viewHolder.endTime(model.getEndTime());
+                viewHolder.startTime(model.getStartTime());
+                viewHolder.setDate();
+            }
+        };
+
+
+
+        historyList.setAdapter(firebaseRecyclerAdapter);
+
+
+
+
+    }
+
+
+
+
+    public static class HistoryViewHolder extends RecyclerView.ViewHolder{
+
+        View mview;
+
+        public HistoryViewHolder(View itemView) {
+            super(itemView);
+            mview=itemView;
+        }
+
+        public void startTime(String startTime){
+            TextView set_StartTime = (TextView)mview.findViewById(R.id.startTimeCardView);
+            set_StartTime.setText(startTime);
+
+        }
+        public void endTime(String endTime){
+            TextView set_endTIme = (TextView)mview.findViewById(R.id.endTimeCardView);
+            set_endTIme.setText(endTime);
+        }
+        public void setFee(String fee){
+            TextView set_Fee = (TextView)mview.findViewById(R.id.feeCardView);
+            set_Fee.setText("Total fee: "+fee);
+        }
+        public void setDate (){
+            TextView date = (TextView) mview.findViewById(R.id.date);
+            TextView weekday = (TextView) mview.findViewById(R.id.weekday);
+            Calendar c = Calendar.getInstance();
+            SimpleDateFormat df = new SimpleDateFormat("dd-MMM-yyyy");
+            String formattedDate = df.format(c.getTime());
+            date.setText(formattedDate);
+            SimpleDateFormat sdf = new SimpleDateFormat("EEEE");
+            Date d = new Date();
+            String dayOfTheWeek = sdf.format(d);
+            weekday.setText(dayOfTheWeek);
+
+
+        }
 
     }
 

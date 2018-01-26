@@ -9,13 +9,11 @@ import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.TextUtils;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
 import android.widget.ImageView;
-import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -48,6 +46,7 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
 
     private ProgressDialog progressDialog;
     private FirebaseAuth firebaseAuth;
+    private DatabaseReference firebaseDatabase;
 
     String profileImageUrl;
 
@@ -59,6 +58,7 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
         firebaseAuth = FirebaseAuth.getInstance();
+        firebaseDatabase = FirebaseDatabase.getInstance().getReference();
         progressDialog = new ProgressDialog(this);
 
         buttonRegister =(Button) findViewById(R.id.registerBtn);
@@ -154,8 +154,12 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
                     if (task.isSuccessful()) {
                         progressDialog.dismiss();
 
+
                         login();
                         saveUserInformation();
+                        storeInformation();
+
+
 
                     } else {
                         Toast.makeText(RegisterActivity.this, "register unsuccessfully", Toast.LENGTH_SHORT).show();
@@ -169,7 +173,7 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
     private void saveUserInformation() {
 
         String displayName = editTextName.getText().toString();
-        String email = editTextEmail.getText().toString().trim();
+
 
         FirebaseUser user = firebaseAuth.getInstance().getCurrentUser();
 
@@ -200,21 +204,19 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
 
     private void storeInformation(){
 
-        String displayName = editTextName.getText().toString().trim();
+        String displayName = editTextName.getText().toString();
         String userEmail = editTextEmail.getText().toString().trim();
         String dob = editTextDOB.getText().toString().trim();
-        String carName = editTextCarName.getText().toString().trim();
-
-        FirebaseUser user = firebaseAuth.getCurrentUser();
-
-        if (user !=null){
 
 
 
+        User user = new User();
 
+        String uid = firebaseAuth.getCurrentUser().getUid().toString();
 
-
-        }
+        firebaseDatabase.child("users").child(uid).child("name").setValue(displayName);
+        firebaseDatabase.child("users").child(uid).child("email").setValue(userEmail);
+        firebaseDatabase.child("users").child(uid).child("dob").setValue(dob);
 
 
 

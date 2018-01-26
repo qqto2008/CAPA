@@ -2,12 +2,38 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.capa.capa.capa.PaymentFragment">
+    tools:context="com.capa.capa.capa.PaymentFragment"
+    android:background="@color/colorPrimary">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="hello payment" />
+        android:orientation="vertical"
+        android:gravity="center">
+
+    <com.braintreepayments.cardform.view.CardForm
+        android:id="@+id/card_form"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+    <Button
+        android:id="@+id/payment"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        style="@style/button_style"
+        android:text="PAY"/>
+    <TextView
+        android:id="@+id/paymentDone"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Payment has been made."
+        android:visibility="invisible"
+        android:fontFamily="casual"
+        android:textColor="@color/white"
+        android:textSize="30dp"
+        android:gravity="center"
+        />
+    </LinearLayout>
+
 
 </FrameLayout>
