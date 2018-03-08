@@ -105,7 +105,8 @@ public class DashBoardFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
-
+        char les = g;
+        
 
         return inflater.inflate(R.layout.fragment_dash_board, container, false);
     }
